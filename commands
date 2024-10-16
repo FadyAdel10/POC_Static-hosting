@@ -1,0 +1,25 @@
+we create directory for each user under path: /home/fady/projects
+then put files in that directory.
+we have nginx configuration file: /home/fady/nginx.conf
+
+we update hosts file to make project_name.user_name.CloudAstro.com maps to local host:
+
+By append the following line in nano /etc/hosts:
+
+127.0.0.1   project_name.user_name.CloudAstro.com
+
+then we run this command:
+
+docker run --name nginx-server \
+    -v /home/fady/projects:/home/fady/projects:ro \
+    -v /home/fady/nginx.conf:/etc/nginx/conf.d/default.conf:ro \
+    -p 8080:80 -d nginx
+
+and The generated links will be for ex: project_name.user_name.CloudAstro.com
+
+
+note: 
+
+127.0.0.1 project1.user1.CloudAstro.com
+
+This entry ensures that when you type project1.user1.CloudAstro.com in the browser, the request is directed to your local machine (localhost), where Nginx will serve the content for user1's project.
